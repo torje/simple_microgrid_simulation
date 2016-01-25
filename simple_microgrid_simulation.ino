@@ -6,8 +6,6 @@ int high_voltage = 900;
 bool on = HIGH;
 bool off = LOW;
 
-bool debug = LOW;
-
 void setup() {
   pinMode(battery_switch_pin, OUTPUT);
   pinMode(pv_switch_pin, OUTPUT);
@@ -31,7 +29,6 @@ void loop() {
     Serial.println("Load not connected");
   }else if (!load_voltage_high())
 	{ 
-//    Serial.println("Load connected");
 		if (pv_voltage_high())
 		{
       toggle_battery_switch(off);
@@ -43,19 +40,6 @@ void loop() {
 			toggle_battery_switch(on);
 		}
 	}
-
- if (debug){
-    debug_msg();
-  }
-}
-
-void debug_msg()
-{
-  Serial.print("PV panel efficiency: ");
-//  Serial.print(100*analogRead(A5)/1023);
-  long pv_eff = (100 * analogRead(A5))/1023;
-  Serial.print(pv_eff);
-  Serial.println(" %");
 }
 
 bool battery_voltage_high()
